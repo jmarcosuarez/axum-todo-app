@@ -1,6 +1,6 @@
 use crate::{
+    app_state::AppState,
     routes::{hello_world::hello_world, users::create_user::create_user},
-    utils::app_state::AppState,
 };
 use axum::{
     routing::{get, post},

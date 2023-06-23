@@ -1,21 +1,13 @@
+use app_state::AppState;
 use router::create_router;
-use sea_orm::Database;
-use utils::app_state::AppState;
 
+pub mod app_state;
 mod database;
 mod router;
 mod routes;
-mod utils;
+pub mod utils;
 
-pub async fn run(database_url: String) {
-    let db = match Database::connect(database_url).await {
-        Ok(db) => db,
-        Err(error) => {
-            eprintln!("Error connecting to the database: {:?}", error);
-            panic!();
-        }
-    };
-    let app_state = AppState { db };
+pub async fn run(app_state: AppState) {
     let app = create_router(app_state);
 
     axum::Server::bind(&"0.0.0.0:3000".parse().unwrap())
