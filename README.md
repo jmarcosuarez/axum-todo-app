@@ -2,11 +2,21 @@
 
 ## To start:
 
+### Start database
+
+```
+docker compose up -d --wait
+```
+
+### Start up the project
+
 ```
 cargo watch -x run
 ```
 
-### Seed initial data (see database/init.sql)
+# Previous setup:
+
+## Seed initial data (see database/init.sql)
 
 ```
 //?
@@ -37,12 +47,6 @@ docker compose up -d --wait // deamon mode = run in the background - now will re
 
 ```
 
-## Start database
-
-```
-docker compose up -d --wait
-```
-
 ## To set up sea-orm
 
 ### Generate models
@@ -55,4 +59,18 @@ sea-orm-cli generate entity -o src/database
 
 ```
 docker compose logs database // name of the service
+```
+
+# Notes
+
+- If `address already in use` shown when trying to start database do:
+
+```
+sudo lsof -i -P -n | grep  5432 // this shows the current process which is using the database
+```
+
+then
+
+```
+sudo kill <current process id>  // this will kill it
 ```
