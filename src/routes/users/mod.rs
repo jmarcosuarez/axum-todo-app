@@ -9,6 +9,7 @@ use crate::{
 
 pub mod create_user;
 pub mod login;
+pub mod logout;
 
 #[derive(Serialize, Deserialize)]
 pub struct ResponseDataUser {
