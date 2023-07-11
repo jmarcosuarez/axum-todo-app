@@ -37,7 +37,7 @@ pub fn validate_token(secret: &str, token: &str) -> Result<bool, AppError> {
             jsonwebtoken::errors::ErrorKind::InvalidToken
             | jsonwebtoken::errors::ErrorKind::InvalidSignature
             | jsonwebtoken::errors::ErrorKind::ExpiredSignature => {
-                AppError::new(StatusCode::UNAUTHORIZED, "Bad or missing token")
+                AppError::new(StatusCode::UNAUTHORIZED, "Not authenticated")
             }
             _ => {
                 eprintln!("Error validating token: {:?}", error);

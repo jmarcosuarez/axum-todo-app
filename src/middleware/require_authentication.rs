@@ -22,10 +22,7 @@ pub async fn require_authentication<T>(
             AppError::new(StatusCode::INTERNAL_SERVER_ERROR, "Error reading token")
         })?
     } else {
-        return Err(AppError::new(
-            StatusCode::UNAUTHORIZED,
-            "Missing authentication token",
-        ));
+        return Err(AppError::new(StatusCode::UNAUTHORIZED, "Not authenticated"));
     };
 
     validate_token(&token_secret.0, header_token)?;
