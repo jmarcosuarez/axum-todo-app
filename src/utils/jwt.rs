@@ -44,5 +44,5 @@ pub fn validate_token(secret: &str, token: &str) -> Result<bool, AppError> {
                 AppError::new(StatusCode::INTERNAL_SERVER_ERROR, "Error validating token")
             }
         })
-        .map(|claim| true)
+        .map(|_claim| true)
 }

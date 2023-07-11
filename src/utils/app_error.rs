@@ -24,7 +24,7 @@ impl IntoResponse for AppError {
         (
             self.code,
             Json(ErrorResponse {
-                error: self.message.clone(),
+                error: self.message,
             }),
         )
             .into_response()

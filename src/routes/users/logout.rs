@@ -9,7 +9,7 @@ pub async fn logout(
 ) -> Result<StatusCode, AppError> {
     let mut user = user.into_active_model();
     user.token = Set(None);
-    user.save(&db).await.map_err(|error| {
+    user.save(&db).await.map_err(|_error| {
         eprintln!("Error removing token from user");
         AppError::new(
             StatusCode::INTERNAL_SERVER_ERROR,
