@@ -43,7 +43,6 @@ where
 
         // Do validation
         if let Err(errors) = task.validate() {
-            dbg!(errors.field_errors());
             let field_errors = errors.field_errors();
             for (_, error) in field_errors {
                 return Err(AppError::new(
