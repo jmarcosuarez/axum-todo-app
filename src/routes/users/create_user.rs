@@ -1,4 +1,4 @@
-use crate::database::tasks::{self, Entity as Tasks, Model};
+use crate::database::tasks::{self, Entity as Tasks};
 use crate::database::users::Model as UserModel;
 use crate::utils::hash::hash_password;
 use crate::utils::token_wrapper::TokenWrapper;

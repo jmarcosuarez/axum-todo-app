@@ -1,7 +1,7 @@
 {
   "recommendations": [
     "serayuzgur.crates",
-    "bungcip.better-toml",
+    "tamasfe.even-better-toml",
     "rust-lang.rust-analyzer",
     "usernamehw.errorlens",
     "rangav.vscode-thunder-client"
