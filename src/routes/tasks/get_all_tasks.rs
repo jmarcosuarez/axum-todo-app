@@ -1,9 +1,8 @@
-use axum::http::StatusCode;
 use axum::{extract::State, Extension, Json};
-use sea_orm::{ColumnTrait, DatabaseConnection, EntityTrait, QueryFilter};
+use sea_orm::DatabaseConnection;
 
 use super::ResponseDataTasks;
-use crate::database::tasks::{self, Entity as Tasks};
+use crate::queries::task_queries;
 use crate::routes::tasks::ResponseTask;
 use crate::{database::users::Model as UserModel, utils::app_error::AppError};
 
@@ -11,15 +10,8 @@ pub async fn get_all_tasks(
     Extension(user): Extension<UserModel>,
     State(db): State<DatabaseConnection>,
 ) -> Result<Json<ResponseDataTasks>, AppError> {
-    let tasks = Tasks::find()
-        .filter(tasks::Column::UserId.eq(user.id))
-        .filter(tasks::Column::DeletedAt.is_null())
-        .all(&db)
-        .await
-        .map_err(|error| {
-            eprintln!("Error getting all tasks: {:?}", error);
-            AppError::new(StatusCode::INTERNAL_SERVER_ERROR, "Error getting all tasks")
-        })?
+    let tasks = task_queries::get_all_tasks(&db, user.id, false)
+        .await?
         .into_iter()
         .map(|db_task| ResponseTask {
             id: db_task.id,
